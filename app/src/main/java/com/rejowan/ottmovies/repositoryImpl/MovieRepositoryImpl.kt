@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rejowan.ottmovies.constants.Config
 import com.rejowan.ottmovies.data.remote.api.RetrofitClient
+import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.data.remote.responses.MovieSearchResponse
 import com.rejowan.ottmovies.repository.MovieRepository
 import retrofit2.await
@@ -20,6 +21,32 @@ class MovieRepositoryImpl : MovieRepository {
     override val batmanMovies: LiveData<MovieSearchResponse?>
         get() = _batmanMovies
 
+    private val _latestMovies = MutableLiveData<MovieSearchResponse?>()
+    override val latestMovies: LiveData<MovieSearchResponse?>
+        get() = _latestMovies
+
+    private val _movieList = MutableLiveData<MutableList<MovieItem>>()
+    override val movieList: LiveData<MutableList<MovieItem>>
+        get() = _movieList
+
+    private var currentPage = 1
+
+    override suspend fun getMovieList() {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.searchMovie("War", page = currentPage)?.await()
+            response?.search?.let {
+                val updatedList = _movieList.value?.toMutableList() ?: mutableListOf()
+                updatedList.addAll(it)
+                _movieList.postValue(updatedList)
+                currentPage++
+            }
+        } catch (e: Exception) {
+            Log.e("MovieRepositoryImpl", "getMovieList: ${e.message}", e)
+        }
+
+    }
 
 
     override suspend fun getBannerMovies() {
@@ -48,5 +75,20 @@ class MovieRepositoryImpl : MovieRepository {
 
         }
     }
+
+
+    override suspend fun getLatestMovies() {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.searchMovie(search = "War", year = "2022")?.await()
+            _latestMovies.postValue(response)
+        } catch (e: Exception) {
+            Log.e("MovieRepositoryImpl", "getLatestMovies: ${e.message}", e)
+            _latestMovies.postValue(null)
+
+        }
+    }
+
 
 }

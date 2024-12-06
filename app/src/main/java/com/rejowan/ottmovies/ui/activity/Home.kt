@@ -57,6 +57,9 @@ class Home : BaseActivity() {
         if (isConnected) {
             movieViewModel.getBannerMovies()
             movieViewModel.getBatmanMovies()
+            movieViewModel.getLatestMovies()
+            movieViewModel.getMovieList()
+
         }
 
     }

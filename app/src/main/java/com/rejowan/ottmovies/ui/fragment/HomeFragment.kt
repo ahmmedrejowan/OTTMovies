@@ -1,5 +1,6 @@
 package com.rejowan.ottmovies.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,7 @@ import com.rejowan.ottmovies.adapter.MoviePortraitAdapter
 import com.rejowan.ottmovies.adapter.MoviePosterAdapter
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.FragmentHomeBinding
+import com.rejowan.ottmovies.ui.activity.Details
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,13 +52,44 @@ class HomeFragment : Fragment() {
             }
         }
 
+        movieViewModel.latestMovies.observe(viewLifecycleOwner) {
+            it?.let { response ->
+                response.search?.let { list ->
+                    setupLatestMovies(list)
+                }
+            }
+        }
+
+
+    }
+
+    private fun setupLatestMovies(list: List<MovieItem>) {
+        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : MoviePortraitAdapter.OnMovieListener {
+            override fun onMovieClick(movieItem: MovieItem) {
+                startActivity(Intent(requireContext(), Details::class.java).apply {
+                    putExtra("movie", movieItem.imdbId)
+                })
+            }
+
+        })
+
+        binding.rvLatest.adapter = moviePortraitAdapter
+        binding.rvLatest.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
 
     }
 
     private fun setupBatmanMovies(list: List<MovieItem>) {
-        val moviePortraitAdapter = MoviePortraitAdapter(list)
-        binding.rvMovies.adapter = moviePortraitAdapter
-        binding.rvMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : MoviePortraitAdapter.OnMovieListener {
+            override fun onMovieClick(movieItem: MovieItem) {
+                startActivity(Intent(requireContext(), Details::class.java).apply {
+                    putExtra("movie", movieItem.imdbId)
+                })
+            }
+
+        })
+        binding.rvBatman.adapter = moviePortraitAdapter
+        binding.rvBatman.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
     }

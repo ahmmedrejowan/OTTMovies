@@ -36,13 +36,16 @@
         android:layout_above="@id/bottomNavView"
         android:layout_below="@id/toolbar" />
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/backgroundColor"
+        app:itemIconTint="@color/bottom_navigation_select_color"
+        app:itemTextColor="@color/bottom_navigation_select_color"
         app:labelVisibilityMode="auto"
         app:menu="@menu/bottom_nav_menu" />
+
 
 </RelativeLayout>
