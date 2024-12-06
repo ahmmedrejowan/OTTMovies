@@ -69,4 +69,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    // splash screen
+    implementation(libs.androidx.core.splashscreen)
+
 }
