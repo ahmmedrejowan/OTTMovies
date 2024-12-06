@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.rejowan.ottmovies.adapter.MoviePortraitAdapter
 import com.rejowan.ottmovies.adapter.MoviePosterAdapter
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.FragmentHomeBinding
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.abs
 
 
 class HomeFragment : Fragment() {
@@ -55,6 +54,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupBatmanMovies(list: List<MovieItem>) {
+        val moviePortraitAdapter = MoviePortraitAdapter(list)
+        binding.rvMovies.adapter = moviePortraitAdapter
+        binding.rvMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
     }
@@ -78,7 +80,6 @@ class HomeFragment : Fragment() {
                 scaleY = 0.85f + scaleFactor * 0.15f
             }
         }
-
 
 
     }
