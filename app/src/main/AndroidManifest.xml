@@ -17,6 +17,9 @@
         android:theme="@style/Theme.OTTMovies"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.Search"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.Player"
             android:exported="false" />
         <activity
