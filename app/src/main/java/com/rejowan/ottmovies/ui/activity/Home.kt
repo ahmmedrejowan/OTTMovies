@@ -2,12 +2,12 @@ package com.rejowan.ottmovies.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.rejowan.ottmovies.R
 import com.rejowan.ottmovies.adapter.FragmentAdapter
 import com.rejowan.ottmovies.databinding.ActivityHomeBinding
+import com.rejowan.ottmovies.viewmodel.MovieViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : BaseActivity() {
 
@@ -15,12 +15,20 @@ class Home : BaseActivity() {
 
     private val fragmentAdapter by lazy { FragmentAdapter(supportFragmentManager, lifecycle) }
 
+    private val movieViewModel: MovieViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(binding.root)
 
 
+        setupFragmentPager()
+
+
+    }
+
+    private fun setupFragmentPager() {
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = fragmentAdapter
         binding.bottomNavView.setOnItemSelectedListener {
@@ -43,12 +51,13 @@ class Home : BaseActivity() {
                 else -> false
             }
         }
-
-
     }
 
     override fun isNetworkAvailable(isConnected: Boolean) {
-        Log.e("SystemLog Home", "isNetworkAvailable: $isConnected")
+        if (isConnected) {
+            movieViewModel.getBannerMovies()
+            movieViewModel.getBatmanMovies()
+        }
 
     }
 

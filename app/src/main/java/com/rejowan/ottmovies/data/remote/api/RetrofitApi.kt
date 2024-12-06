@@ -12,7 +12,7 @@ interface RetrofitAPI {
     @GET("/")
     fun searchMovie(
         @Query("s") search: String,
-        @Query("y") year: Int,
+        @Query("y") year: String = "",
         @Query("type") type: String = "movie",
         @Query("page") page: Int = 1,
         @Query("apikey") apiKey: String = Config.API_KEY
