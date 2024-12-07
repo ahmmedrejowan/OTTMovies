@@ -9,10 +9,12 @@ import com.bumptech.glide.Glide
 import com.rejowan.ottmovies.R
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.ItemMovieBannerBinding
+import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 
 
 class MoviePosterAdapter(
-    private val movieList: ArrayList<MovieItem>, private val viewPager2: ViewPager2
+    private val movieList: ArrayList<MovieItem>, private val viewPager2: ViewPager2,
+    private val onMovieListener: OnMovieListener
 ) : RecyclerView.Adapter<MoviePosterAdapter.ImageSliderViewHolder>() {
 
 
@@ -28,6 +30,10 @@ class MoviePosterAdapter(
             .error(R.drawable.img_placeholder_landscape).centerCrop().into(holder.binding.ivBanner)
 
         holder.binding.tvTitle.text = "${movieItem.title} (${movieItem.year})"
+
+        holder.binding.rl.setOnClickListener {
+            onMovieListener.onMovieClick(movieItem)
+        }
 
         if (position == movieList.size - 2) {
             viewPager2.post {

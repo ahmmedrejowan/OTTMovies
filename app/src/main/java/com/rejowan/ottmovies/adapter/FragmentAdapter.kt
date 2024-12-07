@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rejowan.ottmovies.ui.fragment.HomeFragment
-import com.rejowan.ottmovies.ui.fragment.LatestFragment
+import com.rejowan.ottmovies.ui.fragment.ListFragment
 
 class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -20,7 +20,7 @@ class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
             }
 
             1 -> {
-                LatestFragment()
+                ListFragment()
             }
 
             else -> {

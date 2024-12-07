@@ -58,7 +58,6 @@ class Home : BaseActivity() {
             movieViewModel.getBannerMovies()
             movieViewModel.getBatmanMovies()
             movieViewModel.getLatestMovies()
-            movieViewModel.getMovieList()
 
         }
 

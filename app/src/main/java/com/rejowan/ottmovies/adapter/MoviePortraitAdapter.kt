@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.rejowan.ottmovies.R
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.ItemMoviePortraitBinding
+import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 
 
 class MoviePortraitAdapter(
@@ -39,8 +40,6 @@ class MoviePortraitAdapter(
 
     inner class ImageSliderViewHolder(val binding: ItemMoviePortraitBinding) : RecyclerView.ViewHolder(binding.root)
 
-    interface OnMovieListener {
-        fun onMovieClick(movieItem: MovieItem)
-    }
+
 
 }

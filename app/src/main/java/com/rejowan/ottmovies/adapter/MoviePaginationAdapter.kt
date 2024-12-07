@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rejowan.ottmovies.R
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
-import com.rejowan.ottmovies.databinding.ItemMoviePortraitBinding
+import com.rejowan.ottmovies.databinding.ItemMovieHalfBinding
+import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 
 
 class MoviePaginationAdapter(
@@ -17,7 +18,7 @@ class MoviePaginationAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSliderViewHolder {
-        val binding = ItemMoviePortraitBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemMovieHalfBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ImageSliderViewHolder(binding)
     }
 
@@ -49,7 +50,7 @@ class MoviePaginationAdapter(
 
     override fun getItemCount(): Int = movieList.size
 
-    inner class ImageSliderViewHolder(val binding: ItemMoviePortraitBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ImageSliderViewHolder(val binding: ItemMovieHalfBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     class MovieDiffUtilCallback(
@@ -69,9 +70,6 @@ class MoviePaginationAdapter(
 
     }
 
-    interface OnMovieListener {
-        fun onMovieClick(movieItem: MovieItem)
-        fun onLastItemReach()
-    }
+
 
 }

@@ -15,6 +15,7 @@ import com.rejowan.ottmovies.adapter.MoviePosterAdapter
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.FragmentHomeBinding
 import com.rejowan.ottmovies.ui.activity.Details
+import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -64,11 +65,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupLatestMovies(list: List<MovieItem>) {
-        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : MoviePortraitAdapter.OnMovieListener {
+        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : OnMovieListener {
             override fun onMovieClick(movieItem: MovieItem) {
                 startActivity(Intent(requireContext(), Details::class.java).apply {
                     putExtra("movie", movieItem.imdbId)
                 })
+            }
+
+            override fun onLastItemReach() {
+
             }
 
         })
@@ -80,11 +85,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupBatmanMovies(list: List<MovieItem>) {
-        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : MoviePortraitAdapter.OnMovieListener {
+        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : OnMovieListener {
             override fun onMovieClick(movieItem: MovieItem) {
                 startActivity(Intent(requireContext(), Details::class.java).apply {
                     putExtra("movie", movieItem.imdbId)
                 })
+            }
+
+            override fun onLastItemReach() {
+
             }
 
         })
@@ -95,7 +104,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSlider(list: List<MovieItem>) {
-        val moviePosterAdapter = MoviePosterAdapter(ArrayList(list.take(5)), binding.viewpager)
+        val moviePosterAdapter = MoviePosterAdapter(ArrayList(list.take(5)), binding.viewpager, object : OnMovieListener {
+            override fun onMovieClick(movieItem: MovieItem) {
+                startActivity(Intent(requireContext(), Details::class.java).apply {
+                    putExtra("movie", movieItem.imdbId)
+                })
+            }
+
+            override fun onLastItemReach() {
+
+            }
+
+        })
+
         binding.viewpager.adapter = moviePosterAdapter
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
