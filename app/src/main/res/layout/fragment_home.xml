@@ -48,9 +48,10 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/seeMoreBatman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See All"
+                    android:text="See More"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/colorPrimary"
@@ -88,9 +89,10 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/seeMoreLatest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See All"
+                    android:text="See More"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/colorPrimary"

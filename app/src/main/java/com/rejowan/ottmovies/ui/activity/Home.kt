@@ -1,6 +1,5 @@
 package com.rejowan.ottmovies.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.rejowan.ottmovies.R
@@ -41,11 +40,6 @@ class Home : BaseActivity() {
                 R.id.nav_list -> {
                     binding.viewPager.currentItem = 1
                     true
-                }
-
-                R.id.nav_search -> {
-                    startActivity(Intent(this, Search::class.java))
-                    false
                 }
 
                 else -> false

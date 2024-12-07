@@ -1,6 +1,7 @@
 package com.rejowan.ottmovies.adapter
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -46,6 +47,13 @@ class MoviePaginationAdapter(
         movieList.clear()
         movieList.addAll(movies)
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun replaceAll(movies: List<MovieItem>) {
+        movieList.clear()
+        movieList.addAll(movies)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = movieList.size

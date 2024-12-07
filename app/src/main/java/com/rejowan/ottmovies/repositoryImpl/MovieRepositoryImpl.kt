@@ -18,30 +18,32 @@ class MovieRepositoryImpl : MovieRepository {
     override val bannerMovies: LiveData<MovieSearchResponse?>
         get() = _bannerMovies
 
-    private val _batmanMovies = MutableLiveData<MovieSearchResponse?>()
-    override val batmanMovies: LiveData<MovieSearchResponse?>
+    private val _batmanMovies = MutableLiveData<MutableList<MovieItem>>()
+    override val batmanMovies: LiveData<MutableList<MovieItem>>
         get() = _batmanMovies
 
-    private val _latestMovies = MutableLiveData<MovieSearchResponse?>()
-    override val latestMovies: LiveData<MovieSearchResponse?>
+    private val _latestMovies = MutableLiveData<MutableList<MovieItem>>()
+    override val latestMovies: LiveData<MutableList<MovieItem>>
         get() = _latestMovies
 
     private val _movieList = MutableLiveData<MutableList<MovieItem>>()
     override val movieList: LiveData<MutableList<MovieItem>>
         get() = _movieList
 
-    private var currentPage = 1
+    private var listCurrentPage = 1
+    private var batmanCurrentPage = 1
+    private var latestCurrentPage = 1
 
     override suspend fun getMovieList() {
         try {
             val response = RetrofitClient.getInstance(
                 Config.BASE_URL
-            )?.searchMovie("War", page = currentPage)?.await()
+            )?.searchMovie("War", page = listCurrentPage)?.await()
             response?.search?.let {
                 val updatedList = _movieList.value?.toMutableList() ?: mutableListOf()
                 updatedList.addAll(it)
                 _movieList.postValue(updatedList)
-                currentPage++
+                listCurrentPage++
             }
         } catch (e: Exception) {
             Log.e("MovieRepositoryImpl", "getMovieList: ${e.message}", e)
@@ -82,11 +84,15 @@ class MovieRepositoryImpl : MovieRepository {
         try {
             val response = RetrofitClient.getInstance(
                 Config.BASE_URL
-            )?.searchMovie("Batman")?.await()
-            _batmanMovies.postValue(response)
+            )?.searchMovie("Batman", page = batmanCurrentPage)?.await()
+            response?.search?.let {
+                val updatedList = _batmanMovies.value?.toMutableList() ?: mutableListOf()
+                updatedList.addAll(it)
+                _batmanMovies.postValue(updatedList)
+                batmanCurrentPage++
+            }
         } catch (e: Exception) {
             Log.e("MovieRepositoryImpl", "getBatmanMovies: ${e.message}", e)
-            _batmanMovies.postValue(null)
 
         }
     }
@@ -96,11 +102,16 @@ class MovieRepositoryImpl : MovieRepository {
         try {
             val response = RetrofitClient.getInstance(
                 Config.BASE_URL
-            )?.searchMovie(search = "War", year = "2022")?.await()
-            _latestMovies.postValue(response)
+            )?.searchMovie(search = "War", year = "2022", page = latestCurrentPage)?.await()
+            response?.search?.let {
+                val updatedList = _latestMovies.value?.toMutableList() ?: mutableListOf()
+                updatedList.addAll(it)
+                _latestMovies.postValue(updatedList)
+                latestCurrentPage++
+            }
+
         } catch (e: Exception) {
             Log.e("MovieRepositoryImpl", "getLatestMovies: ${e.message}", e)
-            _latestMovies.postValue(null)
 
         }
     }

@@ -15,6 +15,7 @@ import com.rejowan.ottmovies.adapter.MoviePosterAdapter
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.FragmentHomeBinding
 import com.rejowan.ottmovies.ui.activity.Details
+import com.rejowan.ottmovies.ui.activity.MovieList
 import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,18 +48,26 @@ class HomeFragment : Fragment() {
 
         movieViewModel.batmanMovies.observe(viewLifecycleOwner) {
             it?.let { response ->
-                response.search?.let { list ->
-                    setupBatmanMovies(list)
-                }
+                setupBatmanMovies(response.toList())
             }
         }
 
         movieViewModel.latestMovies.observe(viewLifecycleOwner) {
             it?.let { response ->
-                response.search?.let { list ->
-                    setupLatestMovies(list)
-                }
+                setupLatestMovies(response.toList())
             }
+        }
+
+        binding.seeMoreBatman.setOnClickListener {
+            startActivity(Intent(requireContext(), MovieList::class.java).apply {
+                putExtra("type", "batman")
+            })
+        }
+
+        binding.seeMoreLatest.setOnClickListener {
+            startActivity(Intent(requireContext(), MovieList::class.java).apply {
+                putExtra("type", "latest")
+            })
         }
 
 

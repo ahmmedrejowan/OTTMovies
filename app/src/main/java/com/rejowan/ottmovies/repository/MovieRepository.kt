@@ -9,9 +9,9 @@ interface MovieRepository {
 
     val bannerMovies: LiveData<MovieSearchResponse?>
 
-    val batmanMovies: LiveData<MovieSearchResponse?>
+    val batmanMovies: LiveData<MutableList<MovieItem>>
 
-    val latestMovies: LiveData<MovieSearchResponse?>
+    val latestMovies: LiveData<MutableList<MovieItem>>
 
     val movieList: LiveData<MutableList<MovieItem>>
 
