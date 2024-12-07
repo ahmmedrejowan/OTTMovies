@@ -1,6 +1,7 @@
 package com.rejowan.ottmovies.data.remote.api
 
 import com.rejowan.ottmovies.constants.Config
+import com.rejowan.ottmovies.data.remote.responses.MovieDetailsResponse
 import com.rejowan.ottmovies.data.remote.responses.MovieSearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,7 +17,7 @@ interface RetrofitAPI {
         @Query("type") type: String = "movie",
         @Query("page") page: Int = 1,
         @Query("apikey") apiKey: String = Config.API_KEY
-    ) : Call<MovieSearchResponse>
+    ): Call<MovieSearchResponse>
 
 
     @GET("/")
@@ -25,8 +26,7 @@ interface RetrofitAPI {
         @Query("t") title: String = "",
         @Query("plot") plot: String = "short",
         @Query("apikey") apiKey: String = Config.API_KEY
-    ) : Call<MovieSearchResponse>
-
+    ): Call<MovieDetailsResponse>
 
 
 }

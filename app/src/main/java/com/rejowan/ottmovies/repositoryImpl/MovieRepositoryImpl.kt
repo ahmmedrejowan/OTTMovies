@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rejowan.ottmovies.constants.Config
 import com.rejowan.ottmovies.data.remote.api.RetrofitClient
+import com.rejowan.ottmovies.data.remote.responses.MovieDetailsResponse
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.data.remote.responses.MovieSearchResponse
 import com.rejowan.ottmovies.repository.MovieRepository
@@ -46,6 +47,20 @@ class MovieRepositoryImpl : MovieRepository {
             Log.e("MovieRepositoryImpl", "getMovieList: ${e.message}", e)
         }
 
+    }
+
+    override suspend fun getMovieDetails(imdbID: String, callback: (MovieDetailsResponse?) -> Unit) {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.getMovieDetails(imdbId = imdbID)?.await()
+            response?.let {
+                callback(it)
+            }
+        } catch (e: Exception) {
+            callback(null)
+            Log.e("MovieRepositoryImpl", "getMovieDetails: ${e.message}", e)
+        }
     }
 
 

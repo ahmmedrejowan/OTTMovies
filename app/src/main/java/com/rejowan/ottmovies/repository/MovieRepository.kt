@@ -1,6 +1,7 @@
 package com.rejowan.ottmovies.repository
 
 import androidx.lifecycle.LiveData
+import com.rejowan.ottmovies.data.remote.responses.MovieDetailsResponse
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.data.remote.responses.MovieSearchResponse
 
@@ -22,5 +23,6 @@ interface MovieRepository {
 
     suspend fun getMovieList()
 
+    suspend fun getMovieDetails(imdbID: String, callback: (MovieDetailsResponse?) -> Unit)
 
 }

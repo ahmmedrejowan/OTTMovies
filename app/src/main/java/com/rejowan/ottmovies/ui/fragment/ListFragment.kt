@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rejowan.ottmovies.adapter.MoviePaginationAdapter
-import com.rejowan.ottmovies.adapter.MoviePaginationAdapter.OnMovieListener
 import com.rejowan.ottmovies.data.remote.responses.MovieItem
 import com.rejowan.ottmovies.databinding.FragmentLatestBinding
 import com.rejowan.ottmovies.ui.activity.Details
+import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LatestFragment : Fragment() {
+class ListFragment : Fragment() {
 
 
     private val binding by lazy { FragmentLatestBinding.inflate(layoutInflater) }
@@ -24,6 +24,7 @@ class LatestFragment : Fragment() {
     private lateinit var moviePaginationAdapter: MoviePaginationAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        movieViewModel.getMovieList()
         return binding.root
     }
 
@@ -45,7 +46,7 @@ class LatestFragment : Fragment() {
         })
 
         binding.rvMovies.adapter = moviePaginationAdapter
-        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
 
         movieViewModel.movieList.observe(viewLifecycleOwner) {
             it?.let { list ->

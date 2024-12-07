@@ -2,6 +2,7 @@ package com.rejowan.ottmovies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rejowan.ottmovies.data.remote.responses.MovieDetailsResponse
 import com.rejowan.ottmovies.repository.MovieRepository
 import kotlinx.coroutines.launch
 
@@ -40,5 +41,12 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
+    fun getMovieDetails(imdbID: String, callback: (MovieDetailsResponse?) -> Unit) {
+        viewModelScope.launch {
+            repository.getMovieDetails(imdbID) {
+                callback(it)
+            }
+        }
+    }
 
 }
