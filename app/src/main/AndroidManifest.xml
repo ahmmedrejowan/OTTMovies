@@ -21,6 +21,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.Player"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Player"
             android:exported="false" />
         <activity
             android:name=".ui.activity.Details"

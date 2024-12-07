@@ -170,36 +170,52 @@
 
             </LinearLayout>
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_watch_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="10dp"
+                android:text="Watch Now"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/baseline_play_circle_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/backgroundColor"
                 android:layout_margin="8dp"
                 android:elevation="2dp"
+                app:cardBackgroundColor="@color/backgroundColor"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="8dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Runtime"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Runtime"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_runtime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="143 Minute" />
@@ -208,19 +224,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="IMDB Rating"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="IMDB Rating"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="8.1/10" />
@@ -228,19 +244,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Box Office"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Box Office"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_box_office"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="$305,413,918" />
@@ -254,33 +270,33 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/backgroundColor"
                 android:layout_margin="8dp"
                 android:elevation="2dp"
+                app:cardBackgroundColor="@color/backgroundColor"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="8dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Actors"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Actors"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_actor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="Johnny Depp, Geoffrey Rush, Orlando Bloom" />
@@ -288,20 +304,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Writer"
                         android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Writer"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_writer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="Ted Elliott, Terry Rossio, Stuart Beattie" />
@@ -310,27 +326,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Director"
                         android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Director"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_directory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="Ted Elliott, Terry Rossio, Stuart Beattie" />
 
 
-
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -338,37 +352,36 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/backgroundColor"
                 android:layout_margin="8dp"
                 android:elevation="2dp"
+                app:cardBackgroundColor="@color/backgroundColor"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="8dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Plot"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Plot"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_plot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="Johnny Depp, Geoffrey Rush, Orlando Bloom" />
-
 
 
                 </LinearLayout>
@@ -378,37 +391,36 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/backgroundColor"
                 android:layout_margin="8dp"
                 android:elevation="2dp"
+                app:cardBackgroundColor="@color/backgroundColor"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="8dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Awards"
                         android:layout_gravity="start"
                         android:fontFamily="sans-serif-medium"
+                        android:text="Awards"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tv_awards"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_gravity="start"
                         android:textColor="@color/textColor"
                         android:textSize="16sp"
                         tools:text="Johnny Depp, Geoffrey Rush, Orlando Bloom" />
-
 
 
                 </LinearLayout>

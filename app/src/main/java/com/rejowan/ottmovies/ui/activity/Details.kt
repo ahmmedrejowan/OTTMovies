@@ -1,5 +1,6 @@
 package com.rejowan.ottmovies.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -32,7 +33,6 @@ class Details : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-
     }
 
     private fun updateView(movie: MovieDetailsResponse) {
@@ -59,6 +59,12 @@ class Details : AppCompatActivity() {
 
         binding.tvAwards.text = movie.awards
 
+
+        binding.btnWatchNow.setOnClickListener {
+            startActivity(Intent(this, Player::class.java).apply {
+                putExtra("movie", movie.imdbID)
+            })
+        }
 
     }
 

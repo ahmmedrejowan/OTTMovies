@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupLatestMovies(list: List<MovieItem>) {
-        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : OnMovieListener {
+        val moviePortraitAdapter = MoviePortraitAdapter(list.take(10), onMovieListener = object : OnMovieListener {
             override fun onMovieClick(movieItem: MovieItem) {
                 startActivity(Intent(requireContext(), Details::class.java).apply {
                     putExtra("movie", movieItem.imdbId)
@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupBatmanMovies(list: List<MovieItem>) {
-        val moviePortraitAdapter = MoviePortraitAdapter(list, onMovieListener = object : OnMovieListener {
+        val moviePortraitAdapter = MoviePortraitAdapter(list.take(10), onMovieListener = object : OnMovieListener {
             override fun onMovieClick(movieItem: MovieItem) {
                 startActivity(Intent(requireContext(), Details::class.java).apply {
                     putExtra("movie", movieItem.imdbId)
