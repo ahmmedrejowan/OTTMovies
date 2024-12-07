@@ -14,7 +14,6 @@ class MainApplication : Application() {
         super.onCreate()
 
         // initialize Koin for dependency injection
-
         startKoin {
             androidLogger(Level.ERROR)             // logger
             androidContext(this@MainApplication)

@@ -15,14 +15,16 @@ object RetrofitClient {
     private const val TAG = "RetrofitClient"
     private val retrofitInstances = HashMap<String, Retrofit>()
 
+    /** client with logger for debug mode
+     * stores the instance of retrofit for each base url
+     * @param baseURL base url of the api
+     * @return RetrofitAPI instance
+     */
     fun getInstance(baseURL: String): RetrofitAPI? {
         return try {
             if (!retrofitInstances.containsKey(baseURL)) {
-                val builder =
-                    OkHttpClient.Builder()
-                        .writeTimeout(5, TimeUnit.MINUTES)
-                        .readTimeout(5, TimeUnit.MINUTES)
-                        .connectTimeout(5, TimeUnit.MINUTES)
+                val builder = OkHttpClient.Builder().writeTimeout(5, TimeUnit.MINUTES).readTimeout(5, TimeUnit.MINUTES)
+                    .connectTimeout(5, TimeUnit.MINUTES)
 
                 if (BuildConfig.DEBUG) {
                     val loggingInterceptor = HttpLoggingInterceptor()

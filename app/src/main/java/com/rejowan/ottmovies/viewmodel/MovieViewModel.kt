@@ -14,6 +14,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     val latestMovies = repository.latestMovies
 
+    val missionImpossibleMovies = repository.missionImpossibleMovies
+
     val movieList = repository.movieList
 
     fun getBannerMovies() {
@@ -35,6 +37,12 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
+    fun getMissionImpossibleMovies() {
+        viewModelScope.launch {
+            repository.getMissionImpossibleMovies()
+        }
+    }
+
     fun getMovieList() {
         viewModelScope.launch {
             repository.getMovieList()
@@ -48,5 +56,6 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
             }
         }
     }
+
 
 }

@@ -41,6 +41,8 @@ class MovieList : AppCompatActivity() {
                     movieViewModel.getLatestMovies()
                 } else if (movieType == "batman") {
                     movieViewModel.getBatmanMovies()
+                } else {
+                    movieViewModel.getMissionImpossibleMovies()
                 }
 
                 binding.progressBar.visibility = View.VISIBLE
@@ -64,6 +66,15 @@ class MovieList : AppCompatActivity() {
             binding.title.text = "Batman Movies"
 
             movieViewModel.batmanMovies.observe(this) {
+                it?.let { response ->
+                    moviePaginationAdapter.addMovies(response.toList())
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        } else {
+            binding.title.text = "Mission Impossible Movies"
+
+            movieViewModel.missionImpossibleMovies.observe(this) {
                 it?.let { response ->
                     moviePaginationAdapter.addMovies(response.toList())
                     binding.progressBar.visibility = View.GONE

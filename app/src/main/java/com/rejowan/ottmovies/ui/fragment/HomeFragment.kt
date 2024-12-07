@@ -19,6 +19,7 @@ import com.rejowan.ottmovies.ui.activity.MovieList
 import com.rejowan.ottmovies.utils.interfaces.OnMovieListener
 import com.rejowan.ottmovies.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.abs
 
 
 class HomeFragment : Fragment() {
@@ -58,6 +59,12 @@ class HomeFragment : Fragment() {
             }
         }
 
+        movieViewModel.missionImpossibleMovies.observe(viewLifecycleOwner) {
+            it?.let { response ->
+                setupMissionMovies(response.toList())
+            }
+        }
+
         binding.seeMoreBatman.setOnClickListener {
             startActivity(Intent(requireContext(), MovieList::class.java).apply {
                 putExtra("type", "batman")
@@ -67,6 +74,12 @@ class HomeFragment : Fragment() {
         binding.seeMoreLatest.setOnClickListener {
             startActivity(Intent(requireContext(), MovieList::class.java).apply {
                 putExtra("type", "latest")
+            })
+        }
+
+        binding.seeMoreMission.setOnClickListener {
+            startActivity(Intent(requireContext(), MovieList::class.java).apply {
+                putExtra("type", "mission")
             })
         }
 
@@ -89,6 +102,26 @@ class HomeFragment : Fragment() {
 
         binding.rvLatest.adapter = moviePortraitAdapter
         binding.rvLatest.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
+    }
+
+    private fun setupMissionMovies(list: List<MovieItem>) {
+        val moviePortraitAdapter = MoviePortraitAdapter(list.take(10), onMovieListener = object : OnMovieListener {
+            override fun onMovieClick(movieItem: MovieItem) {
+                startActivity(Intent(requireContext(), Details::class.java).apply {
+                    putExtra("movie", movieItem.imdbId)
+                })
+            }
+
+            override fun onLastItemReach() {
+
+            }
+
+        })
+
+        binding.rvMission.adapter = moviePortraitAdapter
+        binding.rvMission.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
     }
@@ -138,7 +171,7 @@ class HomeFragment : Fragment() {
 
         binding.viewpager.setPageTransformer { page, position ->
             page.apply {
-                val scaleFactor = 1 - Math.abs(position)
+                val scaleFactor = 1 - abs(position)
                 scaleX = 0.85f + scaleFactor * 0.15f
                 scaleY = 0.85f + scaleFactor * 0.15f
             }

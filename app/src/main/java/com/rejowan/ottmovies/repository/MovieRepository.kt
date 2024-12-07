@@ -13,6 +13,8 @@ interface MovieRepository {
 
     val latestMovies: LiveData<MutableList<MovieItem>>
 
+    val missionImpossibleMovies: LiveData<MutableList<MovieItem>>
+
     val movieList: LiveData<MutableList<MovieItem>>
 
     suspend fun getBannerMovies()
@@ -20,6 +22,8 @@ interface MovieRepository {
     suspend fun getBatmanMovies()
 
     suspend fun getLatestMovies()
+
+    suspend fun getMissionImpossibleMovies()
 
     suspend fun getMovieList()
 

@@ -1,6 +1,7 @@
 package com.rejowan.ottmovies.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.rejowan.ottmovies.R
 import com.rejowan.ottmovies.adapter.FragmentAdapter
@@ -18,6 +19,7 @@ class Home : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Splash Screen API
         installSplashScreen()
         setContentView(binding.root)
 
@@ -52,7 +54,12 @@ class Home : BaseActivity() {
             movieViewModel.getBannerMovies()
             movieViewModel.getBatmanMovies()
             movieViewModel.getLatestMovies()
-
+            movieViewModel.getMissionImpossibleMovies()
+            binding.noInternetLayout.visibility = View.GONE
+            binding.viewPager.visibility = View.VISIBLE
+        } else {
+            binding.viewPager.visibility = View.GONE
+            binding.noInternetLayout.visibility = View.VISIBLE
         }
 
     }

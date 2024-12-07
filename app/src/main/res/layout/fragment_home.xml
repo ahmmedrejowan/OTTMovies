@@ -7,6 +7,7 @@
     tools:context=".ui.fragment.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +18,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="280dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -41,9 +42,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:fontFamily="sans-serif-medium"
                     android:text="Batman Movies"
-                    android:layout_alignParentStart="true"
                     android:textColor="@color/textColor"
                     android:textSize="18sp" />
 
@@ -51,9 +52,9 @@
                     android:id="@+id/seeMoreBatman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:text="See More"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -82,9 +83,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:fontFamily="sans-serif-medium"
                     android:text="Latest Movies (2022) (War)"
-                    android:layout_alignParentStart="true"
                     android:textColor="@color/textColor"
                     android:textSize="18sp" />
 
@@ -92,9 +93,9 @@
                     android:id="@+id/seeMoreLatest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:text="See More"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -112,8 +113,49 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_movie_portrait" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Mission Impossible Movies"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/seeMoreMission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="See More"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_movie_portrait" />
+
 
         </LinearLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

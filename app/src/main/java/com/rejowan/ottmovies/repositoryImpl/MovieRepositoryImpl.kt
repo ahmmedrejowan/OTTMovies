@@ -26,6 +26,11 @@ class MovieRepositoryImpl : MovieRepository {
     override val latestMovies: LiveData<MutableList<MovieItem>>
         get() = _latestMovies
 
+    private val _missionImpossibleMovies = MutableLiveData<MutableList<MovieItem>>()
+    override val missionImpossibleMovies: LiveData<MutableList<MovieItem>>
+        get() = _missionImpossibleMovies
+
+
     private val _movieList = MutableLiveData<MutableList<MovieItem>>()
     override val movieList: LiveData<MutableList<MovieItem>>
         get() = _movieList
@@ -33,39 +38,10 @@ class MovieRepositoryImpl : MovieRepository {
     private var listCurrentPage = 1
     private var batmanCurrentPage = 1
     private var latestCurrentPage = 1
-
-    override suspend fun getMovieList() {
-        try {
-            val response = RetrofitClient.getInstance(
-                Config.BASE_URL
-            )?.searchMovie("War", page = listCurrentPage)?.await()
-            response?.search?.let {
-                val updatedList = _movieList.value?.toMutableList() ?: mutableListOf()
-                updatedList.addAll(it)
-                _movieList.postValue(updatedList)
-                listCurrentPage++
-            }
-        } catch (e: Exception) {
-            Log.e("MovieRepositoryImpl", "getMovieList: ${e.message}", e)
-        }
-
-    }
-
-    override suspend fun getMovieDetails(imdbID: String, callback: (MovieDetailsResponse?) -> Unit) {
-        try {
-            val response = RetrofitClient.getInstance(
-                Config.BASE_URL
-            )?.getMovieDetails(imdbId = imdbID)?.await()
-            response?.let {
-                callback(it)
-            }
-        } catch (e: Exception) {
-            callback(null)
-            Log.e("MovieRepositoryImpl", "getMovieDetails: ${e.message}", e)
-        }
-    }
+    private var missionImpossibleCurrentPage = 1
 
 
+    // pirates movies for banner
     override suspend fun getBannerMovies() {
         try {
             val response = RetrofitClient.getInstance(
@@ -80,6 +56,7 @@ class MovieRepositoryImpl : MovieRepository {
 
     }
 
+    // batman movies for batman list
     override suspend fun getBatmanMovies() {
         try {
             val response = RetrofitClient.getInstance(
@@ -97,7 +74,7 @@ class MovieRepositoryImpl : MovieRepository {
         }
     }
 
-
+    // 2022 movies for latest movies
     override suspend fun getLatestMovies() {
         try {
             val response = RetrofitClient.getInstance(
@@ -116,5 +93,54 @@ class MovieRepositoryImpl : MovieRepository {
         }
     }
 
+    // mission impossible movies for mission impossible list
+    override suspend fun getMissionImpossibleMovies() {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.searchMovie("Mission Impossible", page = missionImpossibleCurrentPage)?.await()
+            response?.search?.let {
+                val updatedList = _missionImpossibleMovies.value?.toMutableList() ?: mutableListOf()
+                updatedList.addAll(it)
+                _missionImpossibleMovies.postValue(updatedList)
+                missionImpossibleCurrentPage++
+            }
+        } catch (e: Exception) {
+            Log.e("MovieRepositoryImpl", "getMissionImpossibleMovies: ${e.message}", e)
+        }
+    }
+
+    // list movies for list fragment page
+    override suspend fun getMovieList() {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.searchMovie("War", page = listCurrentPage)?.await()
+            response?.search?.let {
+                val updatedList = _movieList.value?.toMutableList() ?: mutableListOf()
+                updatedList.addAll(it)
+                _movieList.postValue(updatedList)
+                listCurrentPage++
+            }
+        } catch (e: Exception) {
+            Log.e("MovieRepositoryImpl", "getMovieList: ${e.message}", e)
+        }
+
+    }
+
+    // individual movie details
+    override suspend fun getMovieDetails(imdbID: String, callback: (MovieDetailsResponse?) -> Unit) {
+        try {
+            val response = RetrofitClient.getInstance(
+                Config.BASE_URL
+            )?.getMovieDetails(imdbId = imdbID)?.await()
+            response?.let {
+                callback(it)
+            }
+        } catch (e: Exception) {
+            callback(null)
+            Log.e("MovieRepositoryImpl", "getMovieDetails: ${e.message}", e)
+        }
+    }
 
 }

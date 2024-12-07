@@ -10,6 +10,7 @@ import retrofit2.http.Query
 interface RetrofitAPI {
 
 
+    // search movies
     @GET("/")
     fun searchMovie(
         @Query("s") search: String,
@@ -20,6 +21,7 @@ interface RetrofitAPI {
     ): Call<MovieSearchResponse>
 
 
+    // get movie details
     @GET("/")
     fun getMovieDetails(
         @Query("i") imdbId: String = "",
