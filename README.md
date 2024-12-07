@@ -74,6 +74,9 @@ Install the APK on your Android device and run the app.
 
 #### Video Player Screen
 - Displays the demo video
+  - Opening this screen looks for existing video url and position for this movie id
+  - If found then it plays that url from the stored position
+  - If not, then it chooses a random video from the hardcoded list and starts playing it. I also adds the video url and position to the database
   - Video player with play, pause, seek options
   - Video player controls are hidden when inactive
   - Shows in fullscreen landscape mode
